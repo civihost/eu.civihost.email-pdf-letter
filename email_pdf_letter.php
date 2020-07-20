@@ -188,7 +188,7 @@ function email_pdf_letter_civicrm_navigationMenu(&$menu) {
  * @param $formName
  * @param \CRM_Core_Form $form
  */
-function email_pdf_letter_civicrm_civicrm_buildForm($formName, \CRM_Core_Form &$form)
+function email_pdf_letter_civicrm_buildForm($formName, \CRM_Core_Form &$form)
 {
     (new CRM_EmailPdfLetter_Hook_BuildForm($formName, $form))->run();
 }

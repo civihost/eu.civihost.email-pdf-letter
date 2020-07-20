@@ -1,5 +1,4 @@
 <?php
-
 class CRM_EmailPdfLetter_Hook_BuildForm
 {
 
