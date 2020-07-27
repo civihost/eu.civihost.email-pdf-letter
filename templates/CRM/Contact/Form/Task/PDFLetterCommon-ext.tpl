@@ -1,3 +1,17 @@
+{if $form.EMAILtemplate.html}
+    <table class="form-layout-compressed">
+        <tr>
+          <td class="label-left">
+            {$form.EMAILtemplate.label}
+            {* {help id="template" title=$form.EMAILtemplate.label file="CRM/Contact/Form/Task/PDFLetterCommon.hlp"} *}
+          </td>
+          <td>
+            {$form.EMAILtemplate.html}
+          </td>
+        </tr>
+    </table>
+{/if}
+
 <div class="crm-accordion-wrapper crm-html_email-accordion ">
     <div class="crm-accordion-header">
         {$form.html_message2.label}

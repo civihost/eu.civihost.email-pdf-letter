@@ -35,13 +35,22 @@ class CRM_EmailPdfLetter_Hook_BuildForm
         );
         $email_options->setAttribute('onchange', 'CRM.changeOption');
         */
+        CRM_Core_Resources::singleton()->addScriptFile('eu.civihost.email-pdf-letter', 'js/PDFLetterCommon-ext.js');
 
         $className = CRM_Utils_System::getClassName($this->form);
+
+        $prefix = 'EMAIL';
+        $templates[$prefix] = CRM_Core_BAO_MessageTemplate::getMessageTemplates(FALSE);
+
+        $this->form->add('select', "{$prefix}template", ts('Use Template for Email'),
+          ['' => ts('- select -')] + $templates[$prefix], FALSE,
+          ['onChange' => "selectEmailTemplate( this.value, '{$prefix}');"]
+        );
 
         $this->form->add(
             'wysiwyg',
             'html_message2',
-            strstr($className, 'PDF') ? ts('Document Body 2') : ts('HTML Format'),
+            strstr($className, 'PDF') ? ts('Email Body') : ts('HTML Format'),
             [
                 'cols' => '80',
                 'rows' => '8',
