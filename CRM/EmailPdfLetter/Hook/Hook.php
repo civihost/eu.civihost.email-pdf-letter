@@ -14,13 +14,8 @@ class CRM_EmailPdfLetter_Hook_Hook
      */
     public function alterMailParams(&$params, $context)
     {
-        print_r($params);
-        print_r($context);
-        print_r($_POST['email_options']);
-
-        if (isset($_POST['html_message2']) && isset($_POST['email_options']) && isset($params['contact_id'])) {
+        if (isset($_POST['html_message2']) && isset($_POST['email_options']) && isset($params['contactId'])) {
             if (stristr($_POST['email_options'], 'pdfemail') && $params['html'] == ts('Please see attached')) {
-                echo "test";
                 $html_message = $_POST['html_message2'];
                 $realSeparator = ', ';
                 $tableSeparators = [
@@ -51,7 +46,7 @@ class CRM_EmailPdfLetter_Hook_Hook
                 $html_message = str_replace(
                     $separator,
                     $realSeparator,
-                    self::resolveTokens($html_message, $params['contact_id'], null, $grouped, $separator, [])
+                    self::resolveTokens($html_message, $params['contactId'], null, $grouped, $separator, [])
                 );
 
                 $params['html'] = $html_message;
