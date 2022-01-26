@@ -50,6 +50,16 @@ class CRM_EmailPdfLetter_Hook_Hook
                 );
 
                 $params['html'] = $html_message;
+
+
+                // Change attachment name
+                if (
+                    isset($params['attachments']) &&
+                    count($params['attachments']) === 1 &&
+                    $params['attachments'][0]['cleanName'] === 'ThankYou.pdf'
+                ) {
+                    $params['attachments'][0]['cleanName'] = CRM_Utils_String::stripPathChars(CRM_Utils_String::convertStringToSnakeCase($params['subject'])) . '.pdf';
+                }
             }
         }
     }
