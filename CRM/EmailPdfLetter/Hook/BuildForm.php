@@ -27,14 +27,6 @@ class CRM_EmailPdfLetter_Hook_BuildForm
 
     private function CRM_Contribute_Form_Task_PDFLetter()
     {
-        /*/
-        $email_options = $this->form->getElement('email_options');
-        $email_options->addOption(
-            ts('Send emails with text different from PDF. Generate printable PDFs for contacts who cannot receive email.'),
-            'pdfemail_distinct'
-        );
-        $email_options->setAttribute('onchange', 'CRM.changeOption');
-        */
         CRM_Core_Resources::singleton()->addScriptFile('eu.civihost.email-pdf-letter', 'js/PDFLetterCommon-ext.js');
 
         $className = CRM_Utils_System::getClassName($this->form);
@@ -42,12 +34,13 @@ class CRM_EmailPdfLetter_Hook_BuildForm
         $prefix = 'EMAIL';
         $templates[$prefix] = CRM_Core_BAO_MessageTemplate::getMessageTemplates(FALSE);
 
-        $this->form->add('select', "{$prefix}template", ts('Use Template for Email'),
+        $elements = [];
+        $elements[] = $this->form->add('select', "{$prefix}template", ts('Use Template for Email'),
           ['' => ts('- select -')] + $templates[$prefix], FALSE,
           ['onChange' => "selectEmailTemplate( this.value, '{$prefix}');"]
         );
 
-        $this->form->add(
+        $elements[] = $this->form->add(
             'wysiwyg',
             'html_message2',
             strstr($className, 'PDF') ? ts('Email Body') : ts('HTML Format'),
@@ -57,44 +50,14 @@ class CRM_EmailPdfLetter_Hook_BuildForm
                 'onkeyup' => "return verify(this)",
             ]
         );
+
+        // $this->form->addGroup($elements, 'email_pdf_letter', 'Email text');
+        // $this->form->insertElementBefore($elements[1], 'html_message'); // TODO: this does not work
+        // $this->form->insertElementBefore($elements[0], 'html_message');
+
         CRM_Core_Region::instance('form-body')->add(array(
             'template' => 'CRM/Contact/Form/Task/PDFLetterCommon-ext.tpl',
             'weight' => 0,
           ));
-        //print_r($this->form); exit();
-
-        //$this->form->freeze('html_message2');
-        /*
-        $this->redoPriceSet();
-
-        $soft_credit_contact_id = CRM_Utils_Request::retrieveValue('soft_contact', 'Integer', 0);
-
-        if (!$soft_credit_contact_id) {
-          return;
-        }
-
-        $template = $this->form->getTemplate();
-        $honoreeProfileFields = $template->get_template_vars('honoreeProfileFields');
-        $defaultValues = [];
-        CRM_Core_BAO_UFGroup::setProfileDefaults($soft_credit_contact_id, $honoreeProfileFields, $defaultValues);
-
-        foreach ($honoreeProfileFields as $name => $field) {
-          // If soft credit type is not chosen then make omit requiredness from honoree profile fields
-          if (count($this->form->_submitValues) &&
-            empty($this->form->_submitValues['soft_credit_type_id']) &&
-            !empty($field['is_required'])
-          ) {
-            $field['is_required'] = FALSE;
-          }
-          CRM_Core_BAO_UFGroup::buildProfile($this->form, $field, CRM_Profile_Form::MODE_EDIT, $soft_credit_contact_id, FALSE, FALSE, NULL, 'honor');
-
-          if ($this->form->elementExists('honor[' . $field['name'] . ']') && !empty($defaultValues)) {
-            $element = $this->form->getElement('honor[' . $field['name'] . ']');
-            $element->setAttribute('readonly');
-          }
-        }
-
-        $this->form->setDefaults(['soft_credit_type_id' => '1', 'honor' => $defaultValues]);
-        */
     }
 }
