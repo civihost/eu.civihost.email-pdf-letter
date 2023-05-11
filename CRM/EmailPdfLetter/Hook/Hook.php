@@ -93,6 +93,7 @@ class CRM_EmailPdfLetter_Hook_Hook
             $tokenProcessor->evaluate();
             $resolvedTokens = [];
             foreach ($contributionTokens as $token) {
+                $resolvedTokens[$token] = [];
                 foreach ($tokenProcessor->getRows() as $row) {
                     $resolvedTokens[$token][$row->context['contributionId']] = $row->render($token);
                 }
