@@ -9,8 +9,7 @@ function selectEmailTemplate(val, prefix) {
     var text_message = "text_message";
     var html_message = (cj("#edit-html-message-value").length > 0) ? "edit-html-message-value" : "html_message2";
 
-    var dataUrl = "{crmURL p='civicrm/ajax / template ' h=0 }";
-    var dataUrl = '/wp-admin/admin.php?page=CiviCRM&q=civicrm%2Fajax%2Ftemplate';
+    var dataUrl = CRM.url('civicrm/ajax/template')
     cj.post(dataUrl, { tid: val }, function(data) {
         var hide = (data.document_body && isPDF) ? false : true;
         cj('.crm-html_email-accordion, .crm-pdf-format-accordion').toggle(hide);
