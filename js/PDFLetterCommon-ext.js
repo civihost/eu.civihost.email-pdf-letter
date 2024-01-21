@@ -1,32 +1,15 @@
+document.addEventListener("DOMContentLoaded", function (event) {
+  var buttons = document.querySelector('.crm-submit-buttons');
+  buttons.parentNode.insertBefore(document.querySelector('#EMAILtemplate').closest('table'), buttons);
+  buttons.parentNode.insertBefore(document.querySelector('#html_message2').closest('.crm-accordion-wrapper'), buttons);
+});
+
 function selectEmailTemplate(val, prefix) {
     var isPDF = true;
     var text_message = "text_message";
     var html_message = (cj("#edit-html-message-value").length > 0) ? "edit-html-message-value" : "html_message2";
 
-    /*
-    if (!val) {
-        if (!isPDF) {
-            if (prefix == 'SMS') {
-                document.getElementById("sms_text_message").value = "";
-                return;
-            } else {
-                document.getElementById("text_message").value = "";
-            }
-        } else {
-            cj('.crm-html_email-accordion').show();
-            cj('.crm-document-accordion').hide();
-            cj('#document_type').closest('tr').show();
-        }
-
-        CRM.wysiwyg.setVal('#' + html_message, '');
-        if (isPDF) {
-            showBindFormatChkBox();
-        }
-        return;
-    }
-    */
-    var dataUrl = "{crmURL p='civicrm/ajax / template ' h=0 }";
-    var dataUrl = '/wp-admin/admin.php?page=CiviCRM&q=civicrm%2Fajax%2Ftemplate';
+    var dataUrl = CRM.url('civicrm/ajax/template')
     cj.post(dataUrl, { tid: val }, function(data) {
         var hide = (data.document_body && isPDF) ? false : true;
         cj('.crm-html_email-accordion, .crm-pdf-format-accordion').toggle(hide);

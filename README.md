@@ -1,44 +1,37 @@
-# eu.civihost.email-pdf-letter
+# Email PDF Letter (WIP)
 
-![Screenshot](/images/screenshot.png)
+In contributions, in the action "Make Thank-you Letters", if you use "Send emails with an attached PDF where possible." as Print and email options, the email only contains the text "Please see attached" and the attached pdf is called "ThankYou.pdf".
 
-(*FIXME: In one or two paragraphs, describe what the extension does and why one would download it. *)
-
-The extension is licensed under [AGPL-3.0](LICENSE.txt).
+This extension allow you to choose another template and write a specific text for the email.  
+Additionally, the attachment is named as the email subject.
 
 ## Requirements
 
-* PHP v7.0+
-* CiviCRM (*FIXME: Version number*)
+- PHP v7.4+
+- CiviCRM 5.59+
 
-## Installation (Web UI)
+## Installation
 
-This extension has not yet been published for installation via the web UI.
-
-## Installation (CLI, Zip)
-
-Sysadmins and developers may download the `.zip` file for this extension and
-install it with the command-line tool [cv](https://github.com/civicrm/cv).
-
-```bash
-cd <extension-dir>
-cv dl eu.civihost.email-pdf-letter@https://github.com/FIXME/eu.civihost.email-pdf-letter/archive/master.zip
-```
-
-## Installation (CLI, Git)
-
-Sysadmins and developers may clone the [Git](https://en.wikipedia.org/wiki/Git) repo for this extension and
-install it with the command-line tool [cv](https://github.com/civicrm/cv).
-
-```bash
-git clone https://github.com/FIXME/eu.civihost.email-pdf-letter.git
-cv en email_pdf_letter
-```
-
-## Usage
-
-(* FIXME: Where would a new user navigate to get started? What changes would they see? *)
+Install the extension as usual.
 
 ## Known Issues
 
-(* FIXME *)
+- view extra fields only if:
+  -  `CRM_Core_Config::singleton()->doNotAttachPDFReceipt` is false;
+  -  "pdfemail" or "pdfemail_both" are selected;
+- put extra fields above the submit buttons. Now this is done by javascript.
+
+## Help
+If you have any questions regarding this extension that are not answered in this README or the documentation, please post a question on https://civicrm.stackexchange.com. Alternatively, feel free to contact info@civihost.it.
+
+## Contributing
+Contributions to this repository are very welcome. For small changes, feel free to submit a pull request. For larger changes, please create an issue first so we can talk about your ideas.
+
+## Credits
+This is mantained by Samuele Masetto from [CiviHOST](https://www.civihost.it) who you can contact for help, support and further development.
+
+## Disclaimer
+This is still a work-in-progress extension.
+
+## License
+This extension is licensed under [AGPL-3.0](LICENSE.txt).

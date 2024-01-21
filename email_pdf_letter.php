@@ -1,5 +1,4 @@
 <?php
-
 require_once 'email_pdf_letter.civix.php';
 
 use CRM_EmailPdfLetter_ExtensionUtil as E;

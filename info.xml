@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <extension key="eu.civihost.email-pdf-letter" type="module">
   <file>email_pdf_letter</file>
-  <name>Email and PDF receipt</name>
-  <description>Send emails with a PDF receipt: make the text of the email different from the receipt attachment</description>
+  <name>Email PDF letter</name>
+  <description>In "Make Thank-you Letters" action view choose a different template and write a different text for the email than the attachment</description>
   <license>AGPL-3.0</license>
   <maintainer>
     <author>Samuele Masetto</author>
@@ -15,10 +15,10 @@
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
   <releaseDate>2020-07-20</releaseDate>
-  <version>1.0</version>
+  <version>0.2</version>
   <develStage>alpha</develStage>
   <compatibility>
-    <ver>5.0</ver>
+    <ver>5.59</ver>
   </compatibility>
   <comments></comments>
   <classloader>

@@ -231,46 +231,18 @@ function _email_pdf_letter_civix_upgrader()
  * Search directory tree for files which match a glob pattern.
  *
  * Note: Dot-directories (like "..", ".git", or ".svn") will be ignored.
- * Note: In Civi 4.3+, delegate to CRM_Utils_File::findFiles()
+ * Note: Delegate to CRM_Utils_File::findFiles(), this function kept only
+ * for backward compatibility of extension code that uses it.
  *
  * @param string $dir base dir
  * @param string $pattern , glob pattern, eg "*.txt"
  *
- * @return array(string)
+ * @return array
  */
-function _email_pdf_letter_civix_find_files($dir, $pattern)
-{
-    if (is_callable(['CRM_Utils_File', 'findFiles'])) {
-        return CRM_Utils_File::findFiles($dir, $pattern);
-    }
-
-    $todos = [$dir];
-    $result = [];
-    while (!empty($todos)) {
-        $subdir = array_shift($todos);
-        foreach (_email_pdf_letter_civix_glob("$subdir/$pattern") as $match) {
-            if (!is_dir($match)) {
-                $result[] = $match;
-            }
-        }
-        if ($dh = opendir($subdir)) {
-            while (FALSE !== ($entry = readdir($dh))) {
-                $path = $subdir . DIRECTORY_SEPARATOR . $entry;
-                if (
-                    $entry !== '.'
-                    && $entry !== '..'
-                    && (empty($excludeDirsPattern) || !preg_match($excludeDirsPattern, $path))
-                    && is_dir($path)
-                    && is_readable($path)
-                ) {
-                    $todos[] = $path;
-                }
-            }
-            closedir($dh);
-        }
-    }
-    return $result;
+function _email_pdf_letter_civix_find_files($dir, $pattern) {
+  return CRM_Utils_File::findFiles($dir, $pattern);
 }
+
 /**
  * (Delegated) Implements hook_civicrm_managed().
  *
