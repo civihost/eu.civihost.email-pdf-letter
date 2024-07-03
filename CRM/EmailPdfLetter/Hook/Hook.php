@@ -58,7 +58,7 @@ class CRM_EmailPdfLetter_Hook_Hook
                     count($params['attachments']) === 1 &&
                     $params['attachments'][0]['cleanName'] === 'ThankYou.pdf'
                 ) {
-                    $params['attachments'][0]['cleanName'] = CRM_Utils_String::stripPathChars(CRM_Utils_String::convertStringToSnakeCase($params['subject'])) . '.pdf';
+                    $params['attachments'][0]['cleanName'] = CRM_Utils_String::stripPathChars(CRM_Utils_String::convertStringToCamel(strtolower($params['subject']))) . '.pdf';
                 }
             }
         }
