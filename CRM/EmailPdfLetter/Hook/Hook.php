@@ -33,15 +33,10 @@ class CRM_EmailPdfLetter_Hook_Hook
                     }
                 }
                 $groupBy = $_POST['group_by'];
-                $messageToken = CRM_Utils_Token::getTokens($html_message);
                 $grouped = FALSE;
-                $groupByID = 0;
                 if ($groupBy) {
                     $grouped = TRUE;
                 }
-
-                $contributions = [];
-                $contribution = null;
 
                 $html_message = str_replace(
                     $separator,
@@ -50,7 +45,6 @@ class CRM_EmailPdfLetter_Hook_Hook
                 );
 
                 $params['html'] = $html_message;
-
 
                 // Change attachment name
                 if (
