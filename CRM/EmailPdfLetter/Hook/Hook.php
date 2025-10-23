@@ -10,7 +10,7 @@ class CRM_EmailPdfLetter_Hook_Hook
      * @param $context
      *
      * @throws \CRM_Core_Exception
-     * @throws \CiviCRM_API3_Exception
+     * @throws \CRM_Core_Exception
      */
     public function alterMailParams(&$params, $context)
     {

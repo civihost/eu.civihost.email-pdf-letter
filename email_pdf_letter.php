@@ -76,7 +76,7 @@ function email_pdf_letter_civicrm_buildForm($formName, \CRM_Core_Form &$form)
  * @param $context
  *
  * @throws \CRM_Core_Exception
- * @throws \CiviCRM_API3_Exception
+ * @throws \CRM_Core_Exception
  */
 function email_pdf_letter_civicrm_alterMailParams(&$params, $context)
 {
